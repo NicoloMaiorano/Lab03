@@ -1,32 +1,35 @@
 import spellchecker
 
 sc = spellchecker.SpellChecker()
+txtIn = ""
 
-while(True):
+while(txtIn != 4):
     sc.printMenu()
 
-    txtIn = input()
-    # Add input control here!
+#aabid
+#aabouda
+#aad
+#aadli
+#aagadi
+#aalla
 
-    if int(txtIn) == 1:
-        print("Inserisci la tua frase in Italiano\n")
-        txtIn = input()
-        sc.handleSentence(txtIn,"italian")
-        continue
+    txtIn = input("Inserire il numero del menu: ")
 
-    if int(txtIn) == 2:
-        print("Inserisci la tua frase in Inglese\n")
-        txtIn = input()
-        sc.handleSentence(txtIn,"english")
-        continue
+    match txtIn:
+        case "1":
+            txt = input("Inserisci la tua frase in Italiano\n")
+            sc.handleSentence(txt.lower(), "italian")
 
-    if int(txtIn) == 3:
-        print("Inserisci la tua frase in Spagnolo\n")
-        txtIn = input()
-        sc.handleSentence(txtIn,"spanish")
-        continue
+        case 2:
+            txt = input("Inserisci la tua frase in Inglese\n")
+            sc.handleSentence(txt.lower(),"english")
 
-    if int(txtIn) == 4:
-        break
+        case 3:
+            txt = input("Inserisci la tua frase in Spagnolo\n")
+            sc.handleSentence(txt.lower(),"spanish")
 
+        case 4:
+            print("Grazie, arrivederci!")
 
+        case _:
+            print("Errore nella selezione del menu!")
