@@ -1,4 +1,5 @@
 import datetime
+import fileinput
 import time
 import multiDictionary as md
 
@@ -16,18 +17,22 @@ class SpellChecker:
 
             listaErrori = []
             tic = datetime.datetime.now()
+
+            stringaDiz = ""
+
+            print("Prima della creazione della mega stringa")
+            for line in diz:
+                line = line.strip("\n")
+                stringaDiz = stringaDiz + line + " "
+
+            print(stringaDiz)
+
             for p in a:
-                trovato = 0
-                for line in diz:
-                    line.strip("\n")
-                    line = line.split(" ")
-                    if line[0].strip("\n") == p:
-                        trovato = 1
-
-                if trovato == 0:
+                p = p.strip("\n")
+                if stringaDiz.__contains__(p):
+                    pass
+                else:
                     listaErrori.append(p)
-
-
 
             toc = datetime.datetime.now()
             tempo = toc-tic
@@ -42,6 +47,41 @@ class SpellChecker:
 
         elif language == "english":
             diz = open("English.txt", "r")
+            txtIn.strip("\n")
+            txtIn = replaceChars(txtIn)
+            a = txtIn.split(" ")
+
+            listaErrori = []
+            tic = datetime.datetime.now()
+
+            stringaDiz = ""
+
+            for line in fileinput.input(["English.txt"]):
+                line = line.strip("\n")
+                stringaDiz = stringaDiz + line + " "
+
+            #for line in diz:
+            #    line = line.strip("\n")
+            #    stringaDiz = stringaDiz + line + " "
+
+
+            for p in a:
+                p = p.strip("\n")
+                if stringaDiz.__contains__(p):
+                    pass
+                else:
+                    listaErrori.append(p)
+
+            toc = datetime.datetime.now()
+            tempo = toc - tic
+            print("Numero di errori: " + str(len(listaErrori)))
+            print("Parole errate: ")
+
+            for p in listaErrori:
+                print(p)
+
+            print("Tempo impiegato per il controllo ortografico: " + str(tempo))
+
         else:
             diz = open("Spanish.txt", "r")
 
@@ -61,8 +101,9 @@ class SpellChecker:
 
 
 def replaceChars(text):
-    chars= "\\'*_{}[]()><#+-.!$%^;,=_"
+    chars= "\\'*_{}[]()><?#+-.!$%^;,=_"
     for c in chars:
         text = text.replace(c, "")
 
     return text
+

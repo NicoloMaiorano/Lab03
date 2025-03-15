@@ -20,7 +20,7 @@ while(txtIn != 4):
             txt = input("Inserisci la tua frase in Italiano\n")
             sc.handleSentence(txt.lower(), "italian")
 
-        case 2:
+        case "2":
             txt = input("Inserisci la tua frase in Inglese\n")
             sc.handleSentence(txt.lower(),"english")
 
@@ -33,3 +33,5 @@ while(txtIn != 4):
 
         case _:
             print("Errore nella selezione del menu!")
+
+#Il dinosaauro in pigiama decise di andare a fare la spesa, dimenticandosi però che non avva portasfoglio nè pantaloni, suscitando sguradi perplexi tra i pasanti.
