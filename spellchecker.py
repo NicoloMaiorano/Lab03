@@ -10,26 +10,17 @@ class SpellChecker:
 
     def handleSentence(self, txtIn, language):
         if language == "italian":
-            diz = open("Italian.txt", "r")
             txtIn.strip("\n")
             txtIn = replaceChars(txtIn)
             a = txtIn.split(" ")
-
             listaErrori = []
             tic = datetime.datetime.now()
-
-            stringaDiz = ""
-
-            print("Prima della creazione della mega stringa")
-            for line in diz:
-                line = line.strip("\n")
-                stringaDiz = stringaDiz + line + " "
-
-            print(stringaDiz)
+            with open("Italian.txt", "r") as f:
+                wordlist = f.read().splitlines()
 
             for p in a:
                 p = p.strip("\n")
-                if stringaDiz.__contains__(p):
+                if wordlist.__contains__(p):
                     pass
                 else:
                     listaErrori.append(p)
@@ -46,28 +37,17 @@ class SpellChecker:
 
 
         elif language == "english":
-            diz = open("English.txt", "r")
             txtIn.strip("\n")
             txtIn = replaceChars(txtIn)
             a = txtIn.split(" ")
-
             listaErrori = []
             tic = datetime.datetime.now()
-
-            stringaDiz = ""
-
-            for line in fileinput.input(["English.txt"]):
-                line = line.strip("\n")
-                stringaDiz = stringaDiz + line + " "
-
-            #for line in diz:
-            #    line = line.strip("\n")
-            #    stringaDiz = stringaDiz + line + " "
-
+            with open("English.txt", "r") as f:
+                wordlist = f.read().splitlines()
 
             for p in a:
                 p = p.strip("\n")
-                if stringaDiz.__contains__(p):
+                if wordlist.__contains__(p):
                     pass
                 else:
                     listaErrori.append(p)
@@ -83,7 +63,30 @@ class SpellChecker:
             print("Tempo impiegato per il controllo ortografico: " + str(tempo))
 
         else:
-            diz = open("Spanish.txt", "r")
+            txtIn.strip("\n")
+            txtIn = replaceChars(txtIn)
+            a = txtIn.split(" ")
+            listaErrori = []
+            tic = datetime.datetime.now()
+            with open("Spanish.txt.txt", "r") as f:
+                wordlist = f.read().splitlines()
+
+            for p in a:
+                p = p.strip("\n")
+                if wordlist.__contains__(p):
+                    pass
+                else:
+                    listaErrori.append(p)
+
+            toc = datetime.datetime.now()
+            tempo = toc - tic
+            print("Numero di errori: " + str(len(listaErrori)))
+            print("Parole errate: ")
+
+            for p in listaErrori:
+                print(p)
+
+            print("Tempo impiegato per il controllo ortografico: " + str(tempo))
 
 
 
