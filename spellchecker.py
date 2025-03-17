@@ -10,74 +10,78 @@ class SpellChecker:
 
     def handleSentence(self, txtIn, language):
         if language == "italian":
-            txtIn.strip("\n")
-            txtIn = replaceChars(txtIn)
-            a = txtIn.split(" ")
-            listaErrori = []
+            print("Ricerca con contains:")
             tic = datetime.datetime.now()
-            with open("Italian.txt", "r") as f:
-                wordlist = f.read().splitlines()
-
-            for p in a:
-                p = p.strip("\n")
-                if wordlist.__contains__(p):
-                    pass
-                else:
-                    listaErrori.append(p)
-
+            listaErrori = ricercaContains(txtIn, "Italian.txt")
             toc = datetime.datetime.now()
             tempo = toc-tic
             print("Numero di errori: " + str(len(listaErrori)))
             print("Parole errate: ")
-
             for p in listaErrori:
                 print(p)
-
             print("Tempo impiegato per il controllo ortografico: " + str(tempo))
 
+            print("------------------------------------------------------------")
+            print("Ricerca lineare: ")
+            tic = datetime.datetime.now()
+            listaErrori = ricercaLineare(txtIn, "Italian.txt")
+            toc = datetime.datetime.now()
+            tempo = toc - tic
+            print("Numero di errori: " + str(len(listaErrori)))
+            print("Parole errate: ")
+            for p in listaErrori:
+                print(p)
+            print("Tempo impiegato per il controllo ortografico: " + str(tempo))
+
+            print("------------------------------------------------------------")
+            print("Ricerca dicotomica: ")
+            tic = datetime.datetime.now()
+            listaErrori = ricercaDicotomica(txtIn, "Italian.txt")
+            toc = datetime.datetime.now()
+            tempo = toc - tic
+            print("Numero di errori: " + str(len(listaErrori)))
+            print("Parole errate: ")
+            for p in listaErrori:
+                print(p)
+            print("Tempo impiegato per il controllo ortografico: " + str(tempo))
 
         elif language == "english":
-            txtIn.strip("\n")
-            txtIn = replaceChars(txtIn)
-            a = txtIn.split(" ")
-            listaErrori = []
             tic = datetime.datetime.now()
-            with open("English.txt", "r") as f:
-                wordlist = f.read().splitlines()
-
-            for p in a:
-                p = p.strip("\n")
-                if wordlist.__contains__(p):
-                    pass
-                else:
-                    listaErrori.append(p)
-
+            listaErrori = ricercaContains(txtIn, "English.txt")
             toc = datetime.datetime.now()
             tempo = toc - tic
             print("Numero di errori: " + str(len(listaErrori)))
             print("Parole errate: ")
-
             for p in listaErrori:
                 print(p)
-
             print("Tempo impiegato per il controllo ortografico: " + str(tempo))
 
+            print("------------------------------------------------------------")
+            print("Ricerca lineare: ")
+            tic = datetime.datetime.now()
+            listaErrori = ricercaLineare(txtIn, "English.txt")
+            toc = datetime.datetime.now()
+            tempo = toc - tic
+            print("Numero di errori: " + str(len(listaErrori)))
+            print("Parole errate: ")
+            for p in listaErrori:
+                print(p)
+            print("Tempo impiegato per il controllo ortografico: " + str(tempo))
+
+            print("------------------------------------------------------------")
+            print("Ricerca dicotomica: ")
+            tic = datetime.datetime.now()
+            listaErrori = ricercaDicotomica(txtIn, "English.txt")
+            toc = datetime.datetime.now()
+            tempo = toc - tic
+            print("Numero di errori: " + str(len(listaErrori)))
+            print("Parole errate: ")
+            for p in listaErrori:
+                print(p)
+            print("Tempo impiegato per il controllo ortografico: " + str(tempo))
         else:
-            txtIn.strip("\n")
-            txtIn = replaceChars(txtIn)
-            a = txtIn.split(" ")
-            listaErrori = []
             tic = datetime.datetime.now()
-            with open("Spanish.txt.txt", "r") as f:
-                wordlist = f.read().splitlines()
-
-            for p in a:
-                p = p.strip("\n")
-                if wordlist.__contains__(p):
-                    pass
-                else:
-                    listaErrori.append(p)
-
+            listaErrori = ricercaContains(txtIn, "Spanish.txt")
             toc = datetime.datetime.now()
             tempo = toc - tic
             print("Numero di errori: " + str(len(listaErrori)))
@@ -88,8 +92,29 @@ class SpellChecker:
 
             print("Tempo impiegato per il controllo ortografico: " + str(tempo))
 
+            print("------------------------------------------------------------")
+            print("Ricerca lineare: ")
+            tic = datetime.datetime.now()
+            listaErrori = ricercaLineare(txtIn, "Spanish.txt")
+            toc = datetime.datetime.now()
+            tempo = toc - tic
+            print("Numero di errori: " + str(len(listaErrori)))
+            print("Parole errate: ")
+            for p in listaErrori:
+                print(p)
+            print("Tempo impiegato per il controllo ortografico: " + str(tempo))
 
-
+            print("------------------------------------------------------------")
+            print("Ricerca dicotomica: ")
+            tic = datetime.datetime.now()
+            listaErrori = ricercaDicotomica(txtIn, "Spanish.txt")
+            toc = datetime.datetime.now()
+            tempo = toc - tic
+            print("Numero di errori: " + str(len(listaErrori)))
+            print("Parole errate: ")
+            for p in listaErrori:
+                print(p)
+            print("Tempo impiegato per il controllo ortografico: " + str(tempo))
 
     def printMenu(self):
         print("______________________________\n" +
@@ -110,3 +135,67 @@ def replaceChars(text):
 
     return text
 
+def ricercaContains(txtIn, nome):
+    txtIn = txtIn.lower()
+    txtIn.strip("\n")
+    txtIn = replaceChars(txtIn)
+    a = txtIn.split(" ")
+    listaErrori = []
+    with open(nome, "r") as f:
+        wordlist = f.read().splitlines()
+    for p in a:
+        p = p.strip("\n")
+        if wordlist.__contains__(p):
+            pass
+        else:
+            listaErrori.append(p)
+    return listaErrori
+
+def ricercaLineare(txtIn, nome):
+    txtIn = txtIn.lower()
+    txtIn.strip("\n")
+    txtIn = replaceChars(txtIn)
+    a = txtIn.split(" ")
+    listaErrori = []
+    with open(nome, "r") as f:
+        wordlist = f.read().splitlines()
+    for p in a:
+        trovato = 0
+        p = p.strip("\n")
+        for g in wordlist:
+            if p == g:
+                trovato = 1
+
+        if trovato == 0:
+            listaErrori.append(p)
+
+    return listaErrori
+
+def ricercaDicotomica(txtIn, nome):
+    txtIn = txtIn.lower()
+    txtIn.strip("\n")
+    txtIn = replaceChars(txtIn)
+    a = txtIn.split(" ")
+    listaErrori = []
+    with open(nome, "r") as f:
+        wordlist = f.read().splitlines()
+
+    for p in a:
+        trovato = 0
+        p = p.strip("\n")
+
+        if p == wordlist[int((len(wordlist)/2))]:
+            trovato = 1
+        elif p > wordlist[int((len(wordlist)/2))]:
+            for x in range(int((len(wordlist)/2)), len(wordlist)):
+                if p == wordlist[x]:
+                    trovato = 1
+        else:
+            for x in range(int((len(wordlist) / 2))):
+                if p == wordlist[x]:
+                    trovato = 1
+
+        if trovato == 0:
+            listaErrori.append(p)
+
+    return listaErrori

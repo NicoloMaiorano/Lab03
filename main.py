@@ -6,29 +6,22 @@ txtIn = ""
 while(txtIn != 4):
     sc.printMenu()
 
-#aabid
-#aabouda
-#aad
-#aadli
-#aagadi
-#aalla
-
     txtIn = input("Inserire il numero del menu: ")
 
     match txtIn:
         case "1":
             txt = input("Inserisci la tua frase in Italiano\n")
-            sc.handleSentence(txt.lower(), "italian")
+            sc.handleSentence(txt, "italian")
 
         case "2":
             txt = input("Inserisci la tua frase in Inglese\n")
-            sc.handleSentence(txt.lower(),"english")
+            sc.handleSentence(txt,"english")
 
-        case 3:
+        case "3":
             txt = input("Inserisci la tua frase in Spagnolo\n")
-            sc.handleSentence(txt.lower(),"spanish")
+            sc.handleSentence(txt,"spanish")
 
-        case 4:
+        case "4":
             print("Grazie, arrivederci!")
 
         case _:
